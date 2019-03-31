@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    color: #ccc;
+}
+
+a {
+    text-decoration: none;
+    color: #ccc;
+}
+
+ul {
+    list-style: none;
+}
+
+.clearfix::before,
+.clearfix::after{
+    content:"";
+    display:block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear:both;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.alignLeft {
+    text-align: left;
+}
+
+

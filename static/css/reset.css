@@ -1,0 +1,45 @@
+.el-header {
+    height: 140px !important;
+    line-height: 140px;
+    background: lightsteelblue;
+    position: relative;
+    padding: 0 !important;
+}
+
+.el-main {
+    min-height: 434px;
+}
+
+.el-footer {
+    min-height: 120px;
+    line-height: 120px;
+    background-color: lightsteelblue;
+    color: #fff;
+    font-size: 14px;
+}
+
+/*tab切换*/
+.el-tabs--card>.el-tabs__header .el-tabs__nav,
+.el-tabs--card>.el-tabs__header .el-tabs__item {
+    border: none !important;
+    height: 100% !important;
+    transition: none !important;
+    line-height: 44px !important;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__item:hover {
+    cursor: pointer;
+    color: #fff;
+    background: lightsteelblue;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    opacity: 0.6;
+}
+
+div.el-tabs__item.is-active {
+    cursor: pointer;
+    color: #fff;
+    background: lightsteelblue;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
