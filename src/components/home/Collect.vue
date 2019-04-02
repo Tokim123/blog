@@ -1,83 +1,46 @@
 <template>
   <div>
-    <el-ul>
-      <el-li-item v-for="item in list" :key="item.id">
-        <div class="tit">
+    <div v-if="cate.length">
+      <el-ul>
+        <el-li-item v-for="item in cate" :key="item.id">
+          <div class="tit">
             <h2 @click="clickContent(item.id)">{{item.title}}</h2>
             <span @click="clickCate(item.cate)">{{item.cate}}</span>
-        </div>
-        <p @click="clickContent(item.id)">{{ item.content | subs(20)}}</p>
-        <div class="auth">
-          <img :src="item.src" alt>
-          <span>{{item.auth}}</span>
-          <div class="time">{{item.time}}</div>
-        </div>
-      </el-li-item>
-    </el-ul>
+          </div>
+          <p @click="clickContent(item.id)">{{ item.content | subs(20)}}</p>
+          <div class="auth">
+            <img :src="item.src" alt>
+            <span>{{item.auth}}</span>
+            <div class="time">{{item.time}}</div>
+          </div>
+        </el-li-item>
+      </el-ul>
+    </div>
+    <div v-else>暂无数据</div>
   </div>
 </template>
 <script>
 export default {
   props: ['cate'],
   name: 'collect',
-  data () {
+  data() {
     return {
-      list: [
-        {
-          id: 1,
-          title: '这是标题',
-          content:
-            '这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容',
-          src: '../../../static/imgs/logo.jpg',
-          auth: '编程喵',
-          time: '2019-01-11',
-          cate: 'Web'
-        },
-        {
-          id: 2,
-          title: '这是标题',
-          content:
-            '这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容',
-          src: '../../../static/imgs/logo.jpg',
-          auth: '编程喵',
-          time: '2019-01-11',
-          cate: 'Vue'
-        },
-        {
-          id: 3,
-          title: '这是标题',
-          content:
-            '这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容',
-          src: '../../../static/imgs/logo.jpg',
-          auth: '编程喵',
-          time: '2019-01-11',
-          cate: 'Nodejs'
-        },
-        {
-          id: 4,
-          title: '这是标题',
-          content:
-            '这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容',
-          src: '../../../static/imgs/logo.jpg',
-          auth: '编程喵',
-          time: '2019-01-11',
-          cate: 'Go'
-        }
-      ]
+      list: []
     }
   },
   methods: {
-    clickContent (id) {
+    clickContent(id) {
       console.log(id)
     },
-    clickCate (cate) {
+    clickCate(cate) {
       alert(cate)
     }
   },
   watch: {
-    cate (val) {
-      console.log(val)
-    }
+    cate(val, old) {}
+  },
+  mounted () {
+    this.list = this.cate
   }
 }
 </script>
@@ -87,12 +50,12 @@ export default {
 }
 
 .tit h2 {
-    color: #000;
-    display: inline-block;
+  color: #000;
+  display: inline-block;
 }
 
 .tit h2:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .tit span {
@@ -117,7 +80,7 @@ p {
 }
 
 p:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .auth {

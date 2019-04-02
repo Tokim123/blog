@@ -2,8 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import Ul from './components/common/Ul'
-import Li from './components/common/Li'
+import Vuex from 'vuex'
+import store from './store/store'
+import Ul from '@/components/common/Ul'
+import Li from '@/components/common/Li'
 import router from './router'
 import ElementUI from 'element-ui'
 import './element'
@@ -18,10 +20,12 @@ Vue.config.productionTip = false
 Vue.component(Ul.name, Ul)
 Vue.component(Li.name, Li)
 Vue.use(ElementUI)
+Vue.use(Vuex)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

@@ -30,8 +30,8 @@
         <el-row class="cate">
           <el-col :span="24">
             <el-tabs v-model="active" type="card" @tab-click="handleClick">
-              <el-tab-pane label="latest news" name="collect"></el-tab-pane>
-              <el-tab-pane label="web" name="web"></el-tab-pane>
+              <el-tab-pane label="All" name="collect"></el-tab-pane>
+              <el-tab-pane label="Web" name="web"></el-tab-pane>
               <el-tab-pane label="Vue" name="vue"></el-tab-pane>
               <el-tab-pane label="NodeJs" name="node"></el-tab-pane>
               <el-tab-pane label="Git" name="git"></el-tab-pane>
@@ -41,9 +41,10 @@
         </el-row>
       </el-header>
       <el-main>
-          <keep-alive>
-              <component :is="active" :cate="label"></component>
-          </keep-alive>
+        <keep-alive>
+          <router-view></router-view>
+          <collect :cate="label"></collect>
+        </keep-alive>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -56,7 +57,7 @@ export default {
     return {
       msg: 'hello',
       active: 'collect',
-      label: 'all'
+      label: 'collect'
     }
   },
   components: {
@@ -65,9 +66,18 @@ export default {
   },
   methods: {
     handleClick (tab) {
-      this.active = 'collect'
-      this.label = tab.label
+      this.$router.push({
+        name: 'Index',
+        params: {
+          cate: tab.label
+        }
+      })
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    let list = this.$store.getters.filterCate(String(to.params.cate))
+    this.label = list
+    next()
   }
 }
 </script>
@@ -90,7 +100,8 @@ h1 {
   font-family: serif;
   display: inline-block;
   padding-left: 20px;
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '微软雅黑', Arial, sans-serif;
 }
 
 h1 a {
