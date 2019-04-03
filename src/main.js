@@ -12,6 +12,7 @@ import './element'
 import '../static/css/layout.css'
 import '../static/css/reset.css'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'font-awesome/scss/font-awesome.scss'
 Vue.filter('subs', function (val, num) {
   let len = val.length
   return len < num ? val : (val.substr(0, num)) + '...'

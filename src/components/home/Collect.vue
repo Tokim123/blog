@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div v-if="cate.length">
+    <div v-if="list.length">
       <el-ul>
-        <el-li-item v-for="item in cate" :key="item.id">
+        <el-li-item v-for="item in list" :key="item.id">
           <div class="tit">
             <h2 @click="clickContent(item.id)">{{item.title}}</h2>
             <span @click="clickCate(item.cate)">{{item.cate}}</span>
           </div>
-          <p @click="clickContent(item.id)">{{ item.content | subs(20)}}</p>
+          <p @click="clickContent(item.id)">{{ item.content | subs(60)}}</p>
           <div class="auth">
             <img :src="item.src" alt>
             <span>{{item.auth}}</span>
@@ -23,24 +23,32 @@
 export default {
   props: ['cate'],
   name: 'collect',
-  data() {
+  data () {
     return {
       list: []
     }
   },
   methods: {
-    clickContent(id) {
-      console.log(id)
+    clickContent (id) {
+      this.$router.push({
+        name: 'Detail',
+        params: {
+          id: id,
+          uid: 1
+        }
+      })
     },
-    clickCate(cate) {
+    clickCate (cate) {
       alert(cate)
     }
   },
   watch: {
-    cate(val, old) {}
+    cate (val, old) {
+      this.list = this.$store.getters.filterCate(String(val))
+    }
   },
-  mounted () {
-    this.list = this.cate
+  created () {
+    this.list = this.$store.getters.filterCate(String(this.cate))
   }
 }
 </script>

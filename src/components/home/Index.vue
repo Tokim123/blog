@@ -7,7 +7,7 @@
             <div class="grid-content bg-purple">
               <img src="../../../static/imgs/logo.jpg" alt="logo" class="logo" title="logo">
               <h1>
-                <router-link :to="{name: 'Home'}">编程喵</router-link>
+                <a href="/">编程喵</a>
               </h1>
             </div>
           </el-col>
@@ -30,7 +30,7 @@
         <el-row class="cate">
           <el-col :span="24">
             <el-tabs v-model="active" type="card" @tab-click="handleClick">
-              <el-tab-pane label="All" name="collect"></el-tab-pane>
+              <el-tab-pane label="All" name="all"></el-tab-pane>
               <el-tab-pane label="Web" name="web"></el-tab-pane>
               <el-tab-pane label="Vue" name="vue"></el-tab-pane>
               <el-tab-pane label="NodeJs" name="node"></el-tab-pane>
@@ -42,8 +42,7 @@
       </el-header>
       <el-main>
         <keep-alive>
-          <router-view></router-view>
-          <collect :cate="label"></collect>
+          <router-view :cate="active"></router-view>
         </keep-alive>
       </el-main>
       <el-footer>Footer</el-footer>
@@ -55,28 +54,22 @@ export default {
   name: 'index',
   data () {
     return {
-      msg: 'hello',
-      active: 'collect',
-      label: 'collect'
+      active: 'all'
     }
-  },
-  components: {
-    collect: () => import('./Collect'),
-    details: () => import('./Details')
   },
   methods: {
     handleClick (tab) {
+      console.log(tab.name)
       this.$router.push({
         name: 'Index',
         params: {
-          cate: tab.label
+          cate: tab.name
         }
       })
     }
   },
   beforeRouteUpdate (to, from, next) {
-    let list = this.$store.getters.filterCate(String(to.params.cate))
-    this.label = list
+    this.active = to.params.cate
     next()
   }
 }
