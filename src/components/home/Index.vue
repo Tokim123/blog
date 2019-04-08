@@ -15,7 +15,7 @@
             <div class="grid-content bg-purple-light">
               <ul class="login">
                 <li>
-                  <a href="#">登录</a>
+                  <router-link :to="{name: 'login'}">登录</router-link>
                 </li>
                 <li>
                   <a href="#">注册</a>
@@ -42,7 +42,7 @@
       </el-header>
       <el-main>
         <keep-alive>
-          <router-view :cate="active"></router-view>
+          <router-view :cate="active" v-if="isRouterAlive"></router-view>
         </keep-alive>
       </el-main>
       <el-footer>Footer</el-footer>
@@ -52,9 +52,15 @@
 <script>
 export default {
   name: 'index',
+  provide () {
+    return {
+      reload: this.reload
+    }
+  },
   data () {
     return {
-      active: 'all'
+      active: 'all',
+      isRouterAlive: true
     }
   },
   methods: {
@@ -65,6 +71,12 @@ export default {
         params: {
           cate: tab.name
         }
+      })
+    },
+    reload () {
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
       })
     }
   },

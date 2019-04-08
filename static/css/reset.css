@@ -43,3 +43,12 @@ div.el-tabs__item.is-active {
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
 }
+
+div.el-form-item {
+    margin: 12px auto 0;
+}
+
+.btn div.el-form-item__content {
+    margin-left: 0 !important;
+    margin-top: 10px !important;
+}

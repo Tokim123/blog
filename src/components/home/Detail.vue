@@ -22,7 +22,7 @@
         <el-col :span="12">
           <div class="read alignLeft">
             <span>
-              <i class="fa fa-book"></i>100
+              <i class="fa fa-eye"></i>100
             </span>
             <span>
               <i class="fa fa-heart-o"></i>10
@@ -82,6 +82,7 @@
 </template>
 <script>
 export default {
+  inject: ['reload'],
   name: 'detail',
   data () {
     return {
@@ -97,10 +98,27 @@ export default {
   beforeRouteUpdate (to, from, next) {
     let arr = this.$store.getters.getDetail(Number(to.params.id))[0]
     this.info = arr || ''
+    next()
+  },
+  beforeRouteEnter (to, from, next) {
+    next((vm) => {
+      vm.info = vm.$store.getters.getDetail(Number(to.params.id))[0] || ''
+    })
   },
   methods: {
     comArea () {
-      console.log('show comment')
+      this.$prompt('请输入评论', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
+        this.reload()
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消评论'
+        })
+        this.generateData()
+      })
     },
     save () {
       this.$message(
@@ -111,6 +129,9 @@ export default {
           duration: 1000
         }
       )
+    },
+    async generateData () {
+      await this.reload()
     }
   }
 }

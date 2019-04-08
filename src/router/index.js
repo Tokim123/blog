@@ -4,6 +4,7 @@ import Index from '@/components/home/Index'
 import Detail from '@/components/home/Detail'
 import Collect from '@/components/home/Collect'
 import Admin from '@/components/admin/Index'
+import Login from '@/components/home/Login'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/admin',
       name: 'admin',
       component: Admin
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
